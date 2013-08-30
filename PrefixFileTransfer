@@ -11,11 +11,9 @@ import java.io.OutputStream;
 public class PrefixFileTransfer {
 
 	public static void main(String[] args) throws IOException {
-
 		File srcs = new File("C://From");
 		File destn = new File("C://To");
 		copyTo(srcs, destn);
-
 	}
 	public static void copyTo(File src, File dest) { 
 		try {
@@ -26,15 +24,19 @@ public class PrefixFileTransfer {
 				String change = null;
 
 				for( File sourceChild : src.listFiles() ) {
+					System.out.println("The Folder Contains : "+sourceChild);
 					if(sourceChild.getName().startsWith("GP_")){
-						System.out.println("The Folder Contains : "+sourceChild);
 						//Replacing the prefix from the file name
 						change = sourceChild.getName().replaceFirst("GP_", "");
+						// File destChild = new File(dest, sourceChild.getName());
+						File destChild = new File(dest, change);
+						copyTo(sourceChild, destChild);
+						System.out.println("File copied Successfully");
+					}else if(sourceChild.getName().isEmpty() || !sourceChild.getName().startsWith("GP_")){
+						System.out.println("No files Found with that prefix in the folder or the folder is empty");
 					}
-					// File destChild = new File(dest, sourceChild.getName());
-					File destChild = new File(dest, change);
-					copyTo(sourceChild, destChild);
 				}
+				System.out.println("The folder is empty");
 			} 
 			// copy the source file
 			else {
@@ -45,7 +47,6 @@ public class PrefixFileTransfer {
 				int len;
 				while ((len = in.read(buf)) > 0) {
 					out.write(buf, 0, len);
-					System.out.println("Files copied Successfully");
 				}
 				in.close();
 				out.close();
@@ -58,5 +59,4 @@ public class PrefixFileTransfer {
 			e.printStackTrace();
 		}
 	}
-
 }
