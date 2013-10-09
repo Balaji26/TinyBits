@@ -55,3 +55,24 @@
          </map>
       </property>
     </bean>
+    
+    <!-- In Spring, if we need to inject null and empty value, we can do it while creating bean and can set dependency as described below.-->
+    <bean id="test" class="org.ninja.spring.core.Test">
+	   <property name="a"> <null/></property>
+           <property name="b" value=""/>
+     </bean>
+
+<!-- A bean with singleton scope means only one shared instance is managed by spring container. All the 
+dependency of that bean is fulfilled by one instance of bean. In the below example we have a bean X, and
+we have referred it to two bean A and B. As X is in singleton scope so only one time the bean X will be created. 
+singleton scope is the default scope of every bean in spring-->
+
+    <bean id="testX" class="com.concretepage.X" scope="singleton"/>
+    
+    <bean id="testA" class="com.concretepage.A">
+      <property name="x" ref="testX"/>
+    </bean>
+    
+    <bean id="testB" class="com.concretepage.B">
+      <property name="x" ref="testX"/>
+    </bean>
