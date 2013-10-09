@@ -26,3 +26,32 @@
 	       </bean>
 	   </property>
     </bean>
+    <bean id="concrete" class="org.ninja.spring.core.ConcreteCollection">
+       <property name="properties">
+	  <props>
+               <prop key="propKeyA">propValueA</prop>
+               <prop key="propKeyB">propValueB</prop>
+          </props>
+      </property>
+	   
+      <property name="list">
+	 <list>
+             <value>listA</value>
+             <value>listB</value>
+         </list>
+      </property>
+	   
+      <property name="set">
+        <set>
+            <value>setA</value>
+            <value>setB</value>
+        </set>
+      </property>
+	   
+      <property name="map">
+	 <map>
+            <entry key="0" value="mapValueA"/>           
+            <entry key="1" value="mapValueB"/>
+         </map>
+      </property>
+    </bean>
