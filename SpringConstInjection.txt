@@ -1,4 +1,7 @@
-Dependency injection in spring can be achieved by two ways. 1. Constructor based 2. Setter method based injection. In this session we will lean about how to set dependency in spring by constructor. We need to create a constructor which will take the input at configuration time. In spring.xml which is application xml, we need to define constructor-arg inside at configuration time. With constructor-arg we need to use ref keyword to refer the required bean. 
+Dependency injection in spring can be achieved by two ways. 1. Constructor based 2. Setter method based injection. 
+In this session we will lean about how to set dependency in spring by constructor. We need to create a constructor
+which will take the input at configuration time. In spring.xml which is application xml, we need to define 
+constructor-arg inside at configuration time. With constructor-arg we need to use ref keyword to refer the required bean. 
 
 Name.java
 
