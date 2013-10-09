@@ -1,0 +1,67 @@
+Dependency injection in spring can be achieved by two ways. 1. Constructor based 2. Setter method based injection. In this session we will lean about how to set dependency in spring by constructor. We need to create a constructor which will take the input at configuration time. In spring.xml which is application xml, we need to define constructor-arg inside at configuration time. With constructor-arg we need to use ref keyword to refer the required bean. 
+
+Name.java
+
+public class Name {
+	private String name;
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+}
+----------------------------------------------------------------------------
+City.java
+
+package com.concretepage;
+public class City {
+	private Name cityName;
+	
+	public City(Name cityName){
+		this.cityName=cityName;
+	}
+	public String toString() {
+		return "cityName:"+cityName.getName();
+	}
+}
+---------------------------------------------------------------------------
+spring.xml
+
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans 
+           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+ 
+<context:annotation-config  />
+
+<bean id="city" class="com.concretepage.City">
+   <constructor-arg ref="name" />
+</bean>
+
+<bean id="name" class="com.concretepage.Name">
+   <property name="name" value="Agra"/>
+</bean>
+
+</beans>
+
+--------------------------------------------------------------------------------------------------------------------------------------------
+
+SpringDemo.java
+
+import org.springframework.context.support.AbstractApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+public class SpringDemo {
+
+    public static void main(String... args) {
+    	AbstractApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
+            City city=(City) context.getBean("city");
+            System.out.println(city);
+     } 
+}
+ 
