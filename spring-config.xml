@@ -1,0 +1,28 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+    http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd">
+     
+    <bean id="ent" class="org.ninja.spring.core.Entitlement">
+      <!-- In spring when bean is initialized as constructor-arg then dependency can be injected by name, type or index -->
+       
+       <!-- constructor-arg type="java.lang.String" value="Entitlement"/>
+       <constructor-arg type="int" value="100"-->
+       
+       <constructor-arg index="0" value="Index Demo"/>
+       <constructor-arg index="1" value="200" />
+    </bean>
+    
+    <!-- Inner beans are created inside the <property></property> in the setter method injection and in the case 
+       of constructor argument, inner bean is created inside <constructor-arg> </constructor-arg>. Inner beans do
+       not require id or name and scope.-->
+    
+    <bean id="college" class="org.ninja.spring.core.College">
+       <property name="name" value="SSIC"/>
+       <property name="student">
+	       <bean class="org.ninja.spring.core.Student">
+	         <property name="name" value="Ram"/>
+	         <property name="age" value="30"/>
+	       </bean>
+	   </property>
+    </bean>
