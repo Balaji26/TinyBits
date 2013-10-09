@@ -14,7 +14,7 @@ import java.util.Map.Entry;
 import java.util.Set;
 import java.util.Vector;
 
-public class Test1 {
+public class MockCollections {
 	/**
 	 * @param args
 	 */
