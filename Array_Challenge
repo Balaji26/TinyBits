@@ -1,0 +1,58 @@
+//Reversing 2 unsorted Arrays by Sorting and Merge
+
+public class ArrayChallenge{
+    public static void main(String[] args) {
+        Integer[] arr1 = {2, 7, 1, 8};
+        Integer[] arr2 = {70,72,56,90};
+
+        int n = arr1.length;
+        int m = arr2.length;
+        int k = n+m;
+
+        //final merge list
+        int res[] = new int[n+m];
+        sortedMerge(arr1, arr2, res, n, m);
+        System.out.println("Sorted Merge list :");
+
+        for (int i = 0; i < k / 2; i++) {
+            int temp = res[i];
+            res[i] = res[k - 1 - i];
+            res[k - 1 - i] = temp;
+        }
+        System.out.println("\nArray after reverse:");
+        int z = 1;
+        for (int i = 0; i < n+m; i++) {
+            System.out.println(" "+res[i]+"  "+ z++);
+        }
+        
+    }
+
+    private static void sortedMerge(Integer[] arr1, Integer[] arr2, int[] res, int n, int m) {
+
+        Arrays.sort(arr1);
+        Arrays.sort(arr2);
+
+        int i=0, j=0, k=0;
+        while (i < m && j < n) {
+            if(arr1[i] <= arr2[j]) {
+                res[k] = arr1[i];
+                i++;
+            } else {
+                res[k] = arr2[j];
+                j++;
+            }
+            k++;
+        }
+        if (i < m) {
+            for (int p = i; p < m; p++) {
+                res[k] = arr1[p];
+                k++;
+            }
+        } else {
+            for (int p = j; p < n; p++) {
+                res[k] = arr2[p];
+                k++;
+            }
+        }
+    }
+}
